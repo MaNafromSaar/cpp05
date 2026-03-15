@@ -4,21 +4,20 @@
 
 // ===== Auto-generated Orthodox Canonical Form (adjust placeholders as needed) =====
 #include <string>
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <stdexcept>
+#include "AForm.hpp"
 
-class ShrubberyCreationForm
+class ShrubberyCreationForm : public AForm
 {
 private:
-    // NOTE: Add meaningful private members here.
+    const std::string target;
 
 public:
     ShrubberyCreationForm();
+    ShrubberyCreationForm(const std::string& target);
     ShrubberyCreationForm(const ShrubberyCreationForm& other);
     ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
     virtual ~ShrubberyCreationForm();
+    virtual void executeAction() const;
 };
 // ===== End auto-generated block =====
 #endif

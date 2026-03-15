@@ -22,7 +22,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 PresidentialPardonForm::~PresidentialPardonForm() {}
 // ===== End auto-generated stubs for PresidentialPardonForm =====
 
-virtual void executeAction() const
+void PresidentialPardonForm::executeAction() const
 {
     std::cout << target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }

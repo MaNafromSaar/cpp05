@@ -1,12 +1,16 @@
 
 // ===== Auto-generated stubs for ShrubberyCreationForm (append-only block) =====
 #include "ShrubberyCreationForm.hpp"
+#include <fstream>
+#include <stdexcept>
 
 // ── Orthodox Canonical Form ──────────────────────────────────────────────────
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm"ShrubberyCreationForm", 145, 137), target("default") {}
+ShrubberyCreationForm::ShrubberyCreationForm()
+    : AForm("ShrubberyCreationForm", 145, 137), target("default") {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target) : AForm()"ShrubberyCreationForm", 145, 137), target(target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string& target)
+    : AForm("ShrubberyCreationForm", 145, 137), target(target) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) : AForm(other), target(other.target) {}
 

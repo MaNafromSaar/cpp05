@@ -20,7 +20,7 @@ public:
     AForm(const std::string& name, unsigned int signGrade, unsigned int execGrade);
     AForm(const AForm& other);
     AForm& operator=(const AForm& other);  // only copies isSigned; const members can't be reassigned
-    ~AForm();
+    virtual ~AForm();
 
     // Getters
     std::string  getName()      const;
@@ -30,6 +30,8 @@ public:
 
     // Core logic
     void beSigned(const Bureaucrat& b);
+    void execute(const Bureaucrat& executor) const;
+    virtual void executeAction() const = 0;
 
     // Exception classes (OCF not required per subject)
     class GradeTooHighException : public std::exception
@@ -38,6 +40,11 @@ public:
         virtual const char* what() const throw();
     };
     class GradeTooLowException : public std::exception
+    {
+    public:
+        virtual const char* what() const throw();
+    };
+    class FormNotSignedException : public std::exception
     {
     public:
         virtual const char* what() const throw();

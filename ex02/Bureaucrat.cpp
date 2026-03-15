@@ -1,7 +1,7 @@
 
 // ===== Auto-generated stubs for Bureaucrat (append-only block) =====
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
 
 // ── Orthodox Canonical Form ──────────────────────────────────────────────────
 
@@ -123,7 +123,7 @@ std::ostream& operator<<(std::ostream& out, const Bureaucrat& b)
     return out;
 }
 
-void Bureaucrat::signForm(Form& form) const
+void Bureaucrat::signAForm(AForm& form) const
 {
     try
     {
@@ -133,6 +133,20 @@ void Bureaucrat::signForm(Form& form) const
     catch (std::exception& e)
     {
         std::cout << name << " couldn't sign " << form.getName()
+                  << " because " << e.what() << std::endl;
+    }
+}
+
+void Bureaucrat::executeAForm(const AForm& form) const
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << name << " executed " << form.getName() << std::endl;
+    }
+    catch (std::exception& e)
+    {
+        std::cout << name << " couldn't execute " << form.getName()
                   << " because " << e.what() << std::endl;
     }
 }

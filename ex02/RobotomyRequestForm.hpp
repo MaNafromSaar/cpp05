@@ -4,17 +4,16 @@
 
 // ===== Auto-generated Orthodox Canonical Form (adjust placeholders as needed) =====
 #include <string>
-#include <iostream>
-#include <sstream>
+#include "AForm.hpp"
 
-class RobotomyRequestForm
+class RobotomyRequestForm : public AForm
 {
 private:
-    std::string target;
+    const std::string target;
 
 public:
     RobotomyRequestForm();
-    RobotomyRequestForm(const std::string target);
+    RobotomyRequestForm(const std::string& target);
     RobotomyRequestForm(const RobotomyRequestForm& other);
     RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
     virtual ~RobotomyRequestForm();

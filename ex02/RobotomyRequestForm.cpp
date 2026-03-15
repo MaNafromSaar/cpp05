@@ -1,12 +1,16 @@
 
 // ===== Auto-generated stubs for RobotomyRequestForm (append-only block) =====
 #include "RobotomyRequestForm.hpp"
+#include <sys/time.h>
+#include <iostream>
 
 // ── Orthodox Canonical Form ──────────────────────────────────────────────────
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 145, 137), target("Marvin") {}
+RobotomyRequestForm::RobotomyRequestForm()
+    : AForm("RobotomyRequestForm", 72, 45), target("default") {}
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string& target) : AForm()"RobotomyRequestForm", 145, 137), target(target) {}
+RobotomyRequestForm::RobotomyRequestForm(const std::string& target)
+    : AForm("RobotomyRequestForm", 72, 45), target(target) {}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) : AForm(other), target(other.target) {}
 
