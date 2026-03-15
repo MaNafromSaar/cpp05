@@ -6,7 +6,7 @@
 
 Bureaucrat::Bureaucrat() : name("Constant"), grade(150) {}
 
-Bureaucrat::Bureaucrat(const std::string& name, int grade) : name(name), grade(grade)
+Bureaucrat::Bureaucrat(const std::string& name, int grade) : name((name != "") ? name : "Anton"), grade(grade)
 {
     if (grade < 1)
         throw GradeTooHighException();
@@ -15,15 +15,12 @@ Bureaucrat::Bureaucrat(const std::string& name, int grade) : name(name), grade(g
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& other)
-{
-    *this = other;
-}
+    : name(other.name), grade(other.grade) {}
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat& other)
 {
     if (this != &other)
     {
-        name = other.name;
         grade = other.grade;
     }
     return *this;

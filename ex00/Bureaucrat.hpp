@@ -10,8 +10,8 @@
 class Bureaucrat
 {
 private:
-    std::string     name;
-    unsigned int    grade;
+    const std::string   name;
+    unsigned int        grade;
 
 public:
     Bureaucrat();
@@ -23,8 +23,8 @@ public:
     // NOTE: Placeholder signatures — update types/semantics to match real behavior.
     Bureaucrat& operator++();
     Bureaucrat  operator++(int); 
-    Bureaucrat& operator--();          // TODO: choose meaningful return type
-    Bureaucrat  operator--(int);       // TODO: choose meaningful return type
+    Bureaucrat& operator--();
+    Bureaucrat  operator--(int);       
     bool operator==(const Bureaucrat& other) const;
     bool operator>(const Bureaucrat& other) const;
     bool operator<(const Bureaucrat& other) const;
@@ -33,7 +33,6 @@ public:
 
     std::string getName() const;
     unsigned int getGrade() const;
-    std::ostream& signForm(Form f);
 
     class GradeTooHighException : public std::exception {
     public:

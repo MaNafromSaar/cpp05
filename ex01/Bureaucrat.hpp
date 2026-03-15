@@ -7,6 +7,8 @@
 #include <iostream>
 #include <sstream>
 
+class Form;  // forward declaration — breaks the circular include with Form.hpp
+
 class Bureaucrat
 {
 private:
@@ -33,6 +35,7 @@ public:
 
     std::string getName() const;
     unsigned int getGrade() const;
+    void signForm(Form& form) const;
 
     class GradeTooHighException : public std::exception {
     public:

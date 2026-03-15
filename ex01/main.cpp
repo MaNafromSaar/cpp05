@@ -1,102 +1,129 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 #include <iostream>
 
 int main()
 {
-    std::cout << "--- Valid construction ---" << std::endl;
+    // ── Bureaucrat tests (carried over from ex00) ────────────────────────────
+    std::cout << "=== Bureaucrat: valid construction ===" << std::endl;
     try {
         Bureaucrat alice("Alice", 1);
         Bureaucrat bob("Bob", 150);
-        Bureaucrat mid("Mid", 75);
         std::cout << alice;
         std::cout << bob;
-        std::cout << mid;
     }
     catch (std::exception& e) {
         std::cout << "Unexpected: " << e.what() << std::endl;
     }
 
-    std::cout << "--- Grade too high: Bureaucrat(\"Bad\", 0) ---" << std::endl;
-    try {
-        Bureaucrat bad("Bad", 0);
-    }
-    catch (std::exception& e) {
-        std::cout << "Caught: " << e.what() << std::endl;
-    }
+    std::cout << "=== Bureaucrat: grade out of range ===" << std::endl;
+    try { Bureaucrat bad("Bad", 0); }
+    catch (std::exception& e) { std::cout << "grade 0:   " << e.what() << std::endl; }
+    try { Bureaucrat bad("Bad", 151); }
+    catch (std::exception& e) { std::cout << "grade 151: " << e.what() << std::endl; }
 
-    std::cout << "--- Grade too low: Bureaucrat(\"Bad\", 151) ---" << std::endl;
+    // ── Form: valid construction ─────────────────────────────────────────────
+    std::cout << std::endl << "=== Form: valid construction ===" << std::endl;
     try {
-        Bureaucrat bad("Bad", 151);
-    }
-    catch (std::exception& e) {
-        std::cout << "Caught: " << e.what() << std::endl;
-    }
-
-    std::cout << "--- Increment at ceiling: Bureaucrat(\"Top\", 1), then ++top ---" << std::endl;
-    try {
-        Bureaucrat top("Top", 1);
-        ++top;
-    }
-    catch (std::exception& e) {
-        std::cout << "Caught: " << e.what() << std::endl;
-    }
-
-    std::cout << "--- Decrement at floor: Bureaucrat(\"Bot\", 150), then --bot ---" << std::endl;
-    try {
-        Bureaucrat bot("Bot", 150);
-        --bot;
-    }
-    catch (std::exception& e) {
-        std::cout << "Caught: " << e.what() << std::endl;
-    }
-
-    std::cout << "--- Prefix increment/decrement: start grade 50 ---" << std::endl;
-    try {
-        Bureaucrat b("B", 50);
-        std::cout << "Start:       " << b;
-        ++b;
-        std::cout << "After ++b:   " << b;
-        --b;
-        std::cout << "After --b:   " << b;
+        Form f1("Tax Return", 50, 25);
+        Form f2("Budget Approval", 1, 1);
+        std::cout << f1;
+        std::cout << f2;
     }
     catch (std::exception& e) {
         std::cout << "Unexpected: " << e.what() << std::endl;
     }
 
-    std::cout << "--- Postfix increment: start grade 50 ---" << std::endl;
+    // ── Form: invalid grades ─────────────────────────────────────────────────
+    std::cout << "=== Form: grade too high (sign grade 0) ===" << std::endl;
+    try { Form bad("Bad", 0, 10); }
+    catch (std::exception& e) { std::cout << "Caught: " << e.what() << std::endl; }
+
+    std::cout << "=== Form: grade too high (exec grade 0) ===" << std::endl;
+    try { Form bad("Bad", 10, 0); }
+    catch (std::exception& e) { std::cout << "Caught: " << e.what() << std::endl; }
+
+    std::cout << "=== Form: grade too low (sign grade 151) ===" << std::endl;
+    try { Form bad("Bad", 151, 10); }
+    catch (std::exception& e) { std::cout << "Caught: " << e.what() << std::endl; }
+
+    std::cout << "=== Form: grade too low (exec grade 151) ===" << std::endl;
+    try { Form bad("Bad", 10, 151); }
+    catch (std::exception& e) { std::cout << "Caught: " << e.what() << std::endl; }
+
+    // ── beSigned: grade high enough ──────────────────────────────────────────
+    std::cout << std::endl << "=== beSigned: bureaucrat grade sufficient ===" << std::endl;
     try {
-        Bureaucrat b("B", 50);
-        std::cout << "Start:        " << b;
-        Bureaucrat before = b++;
-        std::cout << "Returned b++: " << before;
-        std::cout << "b after b++:  " << b;
+        Bureaucrat senior("Senior", 10);
+        Form permit("Work Permit", 50, 50);
+        std::cout << "Before: " << permit;
+        permit.beSigned(senior);
+        std::cout << "After:  " << permit;
     }
     catch (std::exception& e) {
         std::cout << "Unexpected: " << e.what() << std::endl;
     }
 
-    std::cout << "--- Postfix decrement: start grade 50 ---" << std::endl;
+    // ── beSigned: grade too low ──────────────────────────────────────────────
+    std::cout << "=== beSigned: bureaucrat grade insufficient ===" << std::endl;
     try {
-        Bureaucrat b("B", 50);
-        std::cout << "Start:        " << b;
-        Bureaucrat before = b--;
-        std::cout << "Returned b--: " << before;
-        std::cout << "b after b--:  " << b;
+        Bureaucrat junior("Junior", 100);
+        Form clearance("Security Clearance", 25, 5);
+        clearance.beSigned(junior);
+    }
+    catch (std::exception& e) {
+        std::cout << "Caught: " << e.what() << std::endl;
+    }
+
+    // ── signForm: success ────────────────────────────────────────────────────
+    std::cout << std::endl << "=== signForm: success ===" << std::endl;
+    try {
+        Bureaucrat boss("Boss", 1);
+        Form memo("Internal Memo", 5, 3);
+        boss.signForm(memo);
+        std::cout << memo;
     }
     catch (std::exception& e) {
         std::cout << "Unexpected: " << e.what() << std::endl;
     }
 
-    std::cout << "--- Copy and assignment ---" << std::endl;
+    // ── signForm: failure ────────────────────────────────────────────────────
+    std::cout << "=== signForm: failure ===" << std::endl;
     try {
-        Bureaucrat a("A", 10);
-        Bureaucrat b(a);
-        Bureaucrat c("C", 20);
-        std::cout << "a (original):      " << a;
-        std::cout << "b (copy of a):     " << b;
-        std::cout << "c before assign:   " << c;
-        c = a;
-        std::cout << "c after c = a:     " << c;
+        Bureaucrat intern("Intern", 149);
+        Form restricted("Classified", 10, 5);
+        intern.signForm(restricted);
+        std::cout << restricted;
+    }
+    catch (std::exception& e) {
+        std::cout << "Unexpected: " << e.what() << std::endl;
+    }
+
+    // ── Form OCF: copy constructor ───────────────────────────────────────────
+    std::cout << std::endl << "=== Form OCF: copy constructor ===" << std::endl;
+    try {
+        Bureaucrat worker("Worker", 1);
+        Form original("Original", 50, 50);
+        worker.signForm(original);             // sign the original
+        Form copy(original);                   // copy constructor
+        std::cout << "Original: " << original;
+        std::cout << "Copy:     " << copy;     // copy should also be signed
+    }
+    catch (std::exception& e) {
+        std::cout << "Unexpected: " << e.what() << std::endl;
+    }
+
+    // ── Form OCF: copy assignment ────────────────────────────────────────────
+    std::cout << "=== Form OCF: copy assignment (transfers isSigned only) ===" << std::endl;
+    try {
+        Bureaucrat worker("Worker", 1);
+        Form a("FormA", 50, 50);
+        Form b("FormB", 50, 50);
+        worker.signForm(a);
+        std::cout << "a before assign: " << a;
+        std::cout << "b before assign: " << b;
+        b = a;  // copies isSigned; name/grades stay as FormB's
+        std::cout << "b after b=a:     " << b;
     }
     catch (std::exception& e) {
         std::cout << "Unexpected: " << e.what() << std::endl;
@@ -105,7 +132,6 @@ int main()
     return 0;
 }
 /*
-
 Compile with:
-c++ -Wall -Wextra -Werror -std=c++98 Bureaucrat.cpp main.cpp -o bureaucrat
+c++ -Wall -Wextra -Werror -std=c++98 Bureaucrat.cpp Form.cpp main.cpp -o form
 */

@@ -1,6 +1,7 @@
 
 // ===== Auto-generated stubs for Bureaucrat (append-only block) =====
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 // ── Orthodox Canonical Form ──────────────────────────────────────────────────
 
@@ -117,4 +118,18 @@ std::ostream& operator<<(std::ostream& out, const Bureaucrat& b)
 {
     out << b.getName() << ", bureaucrat grade " << b.getGrade() << "." << std::endl;
     return out;
+}
+
+void Bureaucrat::signForm(Form& form) const
+{
+    try
+    {
+        form.beSigned(*this);
+        std::cout << name << " signed " << form.getName() << std::endl;
+    }
+    catch (std::exception& e)
+    {
+        std::cout << name << " couldn't sign " << form.getName()
+                  << " because " << e.what() << std::endl;
+    }
 }
