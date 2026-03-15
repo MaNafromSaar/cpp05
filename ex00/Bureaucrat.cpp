@@ -69,6 +69,11 @@ bool Bureaucrat::operator==(const Bureaucrat& other) const
     return (grade == other.grade && name == other.name);
 }
 
+bool Bureaucrat::operator!=(const Bureaucrat& other) const
+{
+    return (grade != other.grade || name != other.name);
+}
+
 bool Bureaucrat::operator>(const Bureaucrat& other) const
 {
     return (grade < other.grade);

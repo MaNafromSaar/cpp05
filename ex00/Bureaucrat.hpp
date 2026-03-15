@@ -26,6 +26,7 @@ public:
     Bureaucrat& operator--();
     Bureaucrat  operator--(int);       
     bool operator==(const Bureaucrat& other) const;
+    bool operator!=(const Bureaucrat& other) const;
     bool operator>(const Bureaucrat& other) const;
     bool operator<(const Bureaucrat& other) const;
     bool operator>=(const Bureaucrat& other) const;

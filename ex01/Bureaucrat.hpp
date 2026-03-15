@@ -12,8 +12,8 @@ class Form;  // forward declaration — breaks the circular include with Form.hp
 class Bureaucrat
 {
 private:
-    std::string     name;
-    unsigned int    grade;
+    const std::string   name;
+    unsigned int        grade;
 
 public:
     Bureaucrat();
@@ -28,6 +28,7 @@ public:
     Bureaucrat& operator--();          // TODO: choose meaningful return type
     Bureaucrat  operator--(int);       // TODO: choose meaningful return type
     bool operator==(const Bureaucrat& other) const;
+    bool operator!=(const Bureaucrat& other) const;
     bool operator>(const Bureaucrat& other) const;
     bool operator<(const Bureaucrat& other) const;
     bool operator>=(const Bureaucrat& other) const;

@@ -97,6 +97,12 @@ int main()
         std::cout << "c before assign:   " << c;
         c = a;
         std::cout << "c after c = a:     " << c;
+
+		std::cout << "--- Comparison ---" << std::endl;
+		std::cout << "c == a:     " << (c == a) << std::endl;
+		std::cout << "c != a:     " << (c != a) << std::endl;
+		std::cout << "c > a:     " << (c > a) << std::endl;
+		std::cout << "c <= a:     " << (c <= a) << std::endl;
     }
     catch (std::exception& e) {
         std::cout << "Unexpected: " << e.what() << std::endl;
