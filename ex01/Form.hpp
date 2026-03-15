@@ -10,7 +10,10 @@
 class Form
 {
 private:
-    // NOTE: Add meaningful private members here.
+    std::string     name;
+    bool            isSigned;
+    unsigned int    signGrade;
+    unsigned int    execGrade;
 
 public:
     Form();
@@ -25,6 +28,9 @@ public:
     bool operator<(const Form& other) const;
     bool operator>=(const Form& other) const;
     bool operator<=(const Form& other) const;
+
+    void* beSigned(Bureaucrat b);
+
 };
 // ===== End auto-generated block =====
 #endif

@@ -33,6 +33,7 @@ public:
 
     std::string getName() const;
     unsigned int getGrade() const;
+    std::ostream& signForm(Form f);
 
     class GradeTooHighException : public std::exception {
     public:
